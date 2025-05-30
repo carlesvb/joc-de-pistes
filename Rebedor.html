@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rebedor</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <h1>🚪 Rebedor</h1>
+  <p>L’any en què la Marta va heretar la mansió és la clau.</p>
+
+  <input type="text" id="codiInput" placeholder="Introdueix la resposta aquí">
+  <button onclick="comprovarCodi()">Verificar</button>
+
+  <div id="missatge"></div>
+
+  <!-- Sons -->
+  <audio id="soExit">
+    <source src="audio/success.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="musicaFons" loop>
+    <source src="audio/music.mp3" type="audio/mpeg">
+  </audio>
+  <button onclick="alternarMusica()" id="botonMusica">🔊 Reproduir música</button>
+
+  <script>
+    function normalitzarCodi(codi) {
+      return codi
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toUpperCase();
+    }
+
+    function comprovarCodi() {
+      const codiCorrecte = "2010";
+      const codiIntroduit = normalitzarCodi(document.getElementById("codiInput").value.trim());
+      const missatgeDiv = document.getElementById("missatge");
+      const so = document.getElementById("soExit");
+
+      if (codiIntroduit === codiCorrecte) {
+        missatgeDiv.textContent = "✅ Correcte! Has descobert:";
+        missatgeDiv.className = "correcte";
+        const info = document.createElement("p");
+        info.innerHTML = "<strong>La Marta temia algú del grup verd que sabia massa sobre les seves activitats il·legals.</strong>";
+        missatgeDiv.appendChild(info);
+        so.play();
+      } else {
+        missatgeDiv.textContent = "❌ Codí incorrecte. Torna-ho a provar.";
+        missatgeDiv.className = "incorrecte";
+      }
+    }
+
+    function alternarMusica() {
+      const musica = document.getElementById("musicaFons");
+      const boto = document.getElementById("botonMusica");
+      if (musica.paused) {
+        musica.play();
+        boto.textContent = "🔊 Música activada";
+      } else {
+        musica.pause();
+        boto.textContent = "🔇 Silenciar música";
+      }
+    }
+  </script>
+
+</body>
+</html>
