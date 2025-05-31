@@ -1,36 +1,84 @@
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #111;
-  color: #eee;
-  text-align: center;
-  padding: 40px 20px;
-  background-image: url('../img/background.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: background-color 0.5s ease;
+    background-image: url('background.jpg?v=1');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Cinzel', serif;
+    color: #d4af37; /* Daurat venecià */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
-input {
-  padding: 12px;
-  font-size: 16px;
-  width: 80%;
-  max-width: 300px;
-  margin-bottom: 20px;
-  border: none;
-  border-radius: 5px;
+.container {
+    background: rgba(0, 0, 0, 0.7); /* Fons fosc semitransparent */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 90%;
+    margin: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 1em;
+    width: 80%;
+    max-width: 300px;
+    margin-bottom: 10px;
+    border: 2px solid #d4af37;
+    border-radius: 5px;
+    background: #1a1a1a;
+    color: #fff;
 }
 
 button {
-  padding: 12px 24px;
-  font-size: 16px;
-  background-color: #b00;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
-  display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    background: #d4af37;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #b8972d;
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 1.1em;
+}
+
+/* Optimització per a mòbils */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.8em;
+    }
+
+    p {
+        font-size: 1em;
+    }
+
+    input[type="text"] {
+        width: 100%;
+    }
 }
 
 .correcte {
