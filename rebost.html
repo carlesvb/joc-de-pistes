@@ -1,69 +1,53 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rebost</title>
-  <link rel="stylesheet" href="css/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enigma del Rebost</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <div class="container">
+        <h1>Enigma del Rebost</h1>
+        <p>Un secret amagat entre ampolles de vi i ombres venecianes. Quin és el motiu que mou l’ànima d’aquest misteri?</p>
+        <input type="text" id="codeInput" placeholder="Introdueix el codi secret">
+        <button onclick="checkCode()">Desxifra</button>
+        <p id="result"></p>
+    </div>
+    <audio id="successSound" src="audio/success.mp3"></audio>
+    <audio id="backgroundMusic" src="audio/music.mp3" loop></audio>
+    <script>
+        // Reproduir música de fons automàticament (amb control per a mòbils)
+        window.addEventListener('load', () => {
+            const music = document.getElementById('backgroundMusic');
+            music.volume = 0.3; // Volum baix per no molestar
+            music.play().catch(() => {
+                // Alguns navegadors bloquegen l’autoplay fins a una interacció
+                document.addEventListener('click', () => music.play(), { once: true });
+            });
+        });
 
-  <h1>🧩 Rebost</h1>
-  <p>La família Vila Estruch busca … Pista: heu de trobar 28 lletres i la paraula en té 8.</p>
+        function normalizeText(text) {
+            return text.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        }
 
-  <input type="text" id="codiInput" placeholder="Introdueix la resposta aquí">
-  <button onclick="comprovarCodi()">Verificar</button>
+        function checkCode() {
+            const input = document.getElementById('codeInput').value;
+            const result = document.getElementById('result');
+            const successSound = document.getElementById('successSound');
+            const key = [86, 69, 78, 74, 65, 78, 67, 65]; // "VENJANCA" en ASCII
+            const normalizedInput = normalizeText(input);
+            const inputAscii = Array.from(normalizedInput).map(c => c.charCodeAt(0));
 
-  <div id="missatge"></div>
-
-  <!-- Sons -->
-  <audio id="soExit">
-    <source src="audio/success.mp3" type="audio/mpeg">
-  </audio>
-  <audio id="musicaFons" loop>
-    <source src="audio/music.mp3" type="audio/mpeg">
-  </audio>
-  <button onclick="alternarMusica()" id="botonMusica">🔊 Reproduir música</button>
-
-  <script>
-    function normalitzarCodi(codi) {
-      return codi
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .toUpperCase();
-    }
-
-    function comprovarCodi() {
-      const codiCorrecte = "VENJANCA"; // Sense accent
-      const codiIntroduit = normalitzarCodi(document.getElementById("codiInput").value.trim());
-      const missatgeDiv = document.getElementById("missatge");
-      const so = document.getElementById("soExit");
-
-      if (codiIntroduit === codiCorrecte) {
-        missatgeDiv.textContent = "✅ Correcte! Has descobert:";
-        missatgeDiv.className = "correcte";
-        const info = document.createElement("p");
-        info.innerHTML = "<strong>La Laia sabia un secret perillós sobre algú del grup rosa.</strong>";
-        missatgeDiv.appendChild(info);
-        so.play();
-      } else {
-        missatgeDiv.textContent = "❌ Codí incorrecte. Torna-ho a provar.";
-        missatgeDiv.className = "incorrecte";
-      }
-    }
-
-    function alternarMusica() {
-      const musica = document.getElementById("musicaFons");
-      const boto = document.getElementById("botonMusica");
-      if (musica.paused) {
-        musica.play();
-        boto.textContent = "🔊 Música activada";
-      } else {
-        musica.pause();
-        boto.textContent = "🔇 Silenciar música";
-      }
-    }
-  </script>
-
+            if (JSON.stringify(inputAscii) === JSON.stringify(key)) {
+                result.textContent = 'Correcte! El secret del rebost és teu: una carta antiga revela un complot venecià.';
+                result.style.color = '#d4af37';
+                successSound.play();
+            } else {
+                result.textContent = 'Codi incorrecte. Torna-ho a provar.';
+                result.style.color = '#ff4d4d';
+            }
+        }
+    </script>
 </body>
 </html>
