@@ -2,6 +2,7 @@
 <html lang="ca">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Rebost</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -33,7 +34,7 @@
     }
 
     function comprovarCodi() {
-      const codiCorrecte = "VENJANCA"; // Ara sense accent
+      const codiCorrecte = "VENJANCA"; // Sense accent
       const codiIntroduit = normalitzarCodi(document.getElementById("codiInput").value.trim());
       const missatgeDiv = document.getElementById("missatge");
       const so = document.getElementById("soExit");
