@@ -9,7 +9,7 @@
 <body>
 
   <h1>🪟 Terrassa Interior</h1>
-  <p>Vermell, Blau, Groc i Verd</p>
+  <p>GROCS, RODONES, BLAUS, NEGRES, RECTANGLES, VERDS</p>
 
   <input type="text" id="codiInput" placeholder="Introdueix la resposta aquí">
   <button onclick="comprovarCodi()">Verificar</button>
@@ -36,8 +36,7 @@
     }
 
     function comprovarCodi() {
-      // 🔐 Substitueix aquesta línia pel codi secret quan el tinguis
-      const codiCorrecte = ""; // Exemple: String.fromCharCode(86, 69, 78, 74, 65, 78, 67, 65);
+      const codiCorrecte = String.fromCharCode(52, 52, 52, 52, 49, 49, 49, 52, 50, 52, 52);
       const codiIntroduit = normalitzarCodi(document.getElementById("codiInput").value.trim());
       const missatgeDiv = document.getElementById("missatge");
       const so = document.getElementById("soExit");
