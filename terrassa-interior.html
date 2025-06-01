@@ -28,20 +28,9 @@
   <script>
     document.body.style.backgroundImage = "url('img/background-terrassa-interior.jpg')";
 
-    function normalitzarCodi(codi) {
-      return codi
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .toUpperCase();
-    }
-
     function comprovarCodi() {
-      const codiCorrecte = "4441114244";
+      const codiCorrecte = String.fromCharCode(52, 52, 52, 52, 49, 49, 49, 52, 50, 52, 52); // 4441114244
       const codiIntroduit = document.getElementById("codiInput").value.trim();
-  
-      console.log("Codi introduït:", codiIntroduit); // 👈 Veure què entra
-      console.log("Codi correcte:", codiCorrecte);
-
       const missatgeDiv = document.getElementById("missatge");
       const so = document.getElementById("soExit");
 
@@ -70,6 +59,9 @@
       }
     }
   </script>
+
+</body>
+</html>
 
 </body>
 </html>
