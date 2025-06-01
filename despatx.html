@@ -8,9 +8,7 @@
 </head>
 <body>
 
-  <img src="img/icona-despatx.png" alt="Icona del Despatx" class="icona">
-
-  <h1>🧩 Despatx</h1>
+  <h1>📁 Despatx</h1>
   <p>Munteu el puzzle i desxifreu el missatge. PISTA: Número.</p>
 
   <input type="text" id="codiInput" placeholder="Introdueix la resposta aquí">
@@ -18,35 +16,27 @@
 
   <div id="missatge"></div>
 
+  <!-- Sons -->
   <audio id="soExit">
     <source src="audio/success.mp3" type="audio/mpeg">
   </audio>
   <audio id="musicaFons" loop>
     <source src="audio/music.mp3" type="audio/mpeg">
   </audio>
-
-  <button id="toggleMusic" onclick="alternarMusica()">🔇 Silenciar música</button>
-
-  <div id="puzzlePieceContainer">
-    <h2>🔍 Peça de Puzzle</h2>
-    <img src="img/puzzle-despatx.png" alt="Peça de puzzle - Despatx" class="puzzle-piece">
-    <p>Potser aquesta peça té relació amb la clau final...</p>
-  </div>
+  <button onclick="alternarMusica()" id="botonMusica">🔊 Reproduir música</button>
 
   <script>
     document.body.style.backgroundImage = "url('img/background-despatx.jpg')";
 
-    window.addEventListener("load", () => {
-      const musica = document.getElementById("musicaFons");
-      musica.play().catch(() => {});
-    });
-
     function normalitzarCodi(codi) {
-      return codi.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+      return codi
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toUpperCase();
     }
 
     function comprovarCodi() {
-      const codiCorrecte = String.fromCharCode(53);
+      const codiCorrecte = String.fromCharCode(53); // Codi correcte: 5
       const codiIntroduit = normalitzarCodi(document.getElementById("codiInput").value.trim());
       const missatgeDiv = document.getElementById("missatge");
       const so = document.getElementById("soExit");
@@ -59,20 +49,20 @@
         missatgeDiv.appendChild(info);
         so.play();
       } else {
-        missatgeDiv.textContent = "❌ Codi incorrecte. Torna-ho a provar.";
+        missatgeDiv.textContent = "❌ Codí incorrecte. Torna-ho a provar.";
         missatgeDiv.className = "incorrecte";
       }
     }
 
     function alternarMusica() {
       const musica = document.getElementById("musicaFons");
-      const boto = document.getElementById("toggleMusic");
+      const boto = document.getElementById("botonMusica");
       if (musica.paused) {
         musica.play();
-        boto.textContent = "🔇 Silenciar música";
+        boto.textContent = "🔊 Música activada";
       } else {
         musica.pause();
-        boto.textContent = "🔊 Activar música";
+        boto.textContent = "🔇 Silenciar música";
       }
     }
   </script>
