@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lavabo</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <h1>🚽 Lavabo</h1>
+  <p>Joc del Codi Secret, trobeu les paraules que estiguin relacionades amb un assassinat i busqueu quina és la seva unió.</p>
+
+  <input type="text" id="codiInput" placeholder="Introdueix la resposta aquí">
+  <button onclick="comprovarCodi()">Verificar</button>
+
+  <div id="missatge"></div>
+
+  <!-- Sons -->
+  <audio id="soExit">
+    <source src="audio/success.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="musicaFons" loop>
+    <source src="audio/music.mp3" type="audio/mpeg">
+  </audio>
+  <button onclick="alternarMusica()" id="botonMusica">🔊 Reproduir música</button>
+
+  <script>
+    // Canvia el fons d’aquesta escena
+    document.body.style.backgroundImage = "url('img/background-lavabo.jpg')";
+
+    function normalitzarCodi(codi) {
+      return codi
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toUpperCase();
+    }
+
+    function comprovarCodi() {
+      const codiCorrecte = String.fromCharCode(73, 78, 70, 79, 82, 77, 65, 84, 73, 67, 65); // INFORMATICA (sense accent)
+      const codiIntroduit = normalitzarCodi(document.getElementById("codiInput").value.trim());
+      const missatgeDiv = document.getElementById("missatge");
+      const so = document.getElementById("soExit");
+
+      if (codiIntroduit === codiCorrecte) {
+        missatgeDiv.textContent = "✅ Correcte! Has descobert:";
+        missatgeDiv.className = "correcte";
+        const info = document.createElement("p");
+        info.innerHTML = "<strong>En Charles era expert en això però alguna cosa se li havia escapat.</strong>";
+        missatgeDiv.appendChild(info);
+        so.play();
+      } else {
+        missatgeDiv.textContent = "❌ Codí incorrecte. Torna-ho a provar.";
+        missatgeDiv.className = "incorrecte";
+      }
+    }
+
+    function alternarMusica() {
+      const musica = document.getElementById("musicaFons");
+      const boto = document.getElementById("botonMusica");
+      if (musica.paused) {
+        musica.play();
+        boto.textContent = "🔊 Música activada";
+      } else {
+        musica.pause();
+        boto.textContent = "🔇 Silenciar música";
+      }
+    }
+  </script>
+
+</body>
+</html>
