@@ -3,87 +3,79 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Enigma - Despatx</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 20px;
-      background: url('background-Despatx.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
-      font-family: 'Georgia', serif;
-      text-align: center;
-    }
-    .container {
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 400px;
-      margin: auto;
-      margin-top: 50px;
-    }
-    input[type="text"] {
-      width: 80%;
-      padding: 10px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 5px;
-    }
-    button {
-      padding: 10px 20px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 5px;
-      background-color: #8B0000;
-      color: white;
-      cursor: pointer;
-    }
-    #missatge {
-      margin-top: 20px;
-      font-weight: bold;
-    }
-  </style>
+  <title>Despatx</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Munteu el puzzle i desxifreu el missatge.</h1>
-    <p><strong>Pista:</strong> Número.</p>
-    <input type="text" id="codiInput" placeholder="Introduïu el codi secret..." />
-    <br/>
-    <button onclick="comprovarCodi()">Enviar</button>
-    <div id="missatge"></div>
-  </div>
 
-  <!-- So opcional -->
-  <audio id="soMisteri" loop>
-    <source src="so-misteri.mp3" type="audio/mpeg">
-    El teu navegador no suporta àudio.
+  <img src="img/icona-despatx.png" alt="Icona del Despatx" class="icona">
+
+  <h1>🧩 Despatx</h1>
+  <p>Munteu el puzzle i desxifreu el missatge. PISTA: Número.</p>
+
+  <input type="text" id="codiInput" placeholder="Introdueix la resposta aquí">
+  <button onclick="comprovarCodi()">Verificar</button>
+
+  <div id="missatge"></div>
+
+  <audio id="soExit">
+    <source src="audio/success.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="musicaFons" loop>
+    <source src="audio/music.mp3" type="audio/mpeg">
   </audio>
 
+  <button id="toggleMusic" onclick="alternarMusica()">🔇 Silenciar música</button>
+
+  <div id="puzzlePieceContainer">
+    <h2>🔍 Peça de Puzzle</h2>
+    <img src="img/puzzle-despatx.png" alt="Peça de puzzle - Despatx" class="puzzle-piece">
+    <p>Potser aquesta peça té relació amb la clau final...</p>
+  </div>
+
   <script>
-    function desxifrar(codi) {
-      const clau = "qazwsxedcrfvtgb";
-      let resultat = "";
-      for (let i = 0; i < codi.length; i++) {
-        resultat += String.fromCharCode(
-          codi.charCodeAt(i) ^ clau.charCodeAt(i % clau.length)
-        );
-      }
-      return resultat;
+    document.body.style.backgroundImage = "url('img/background-despatx.jpg')";
+
+    window.addEventListener("load", () => {
+      const musica = document.getElementById("musicaFons");
+      musica.play().catch(() => {});
+    });
+
+    function normalitzarCodi(codi) {
+      return codi.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
     }
 
-    // Aquest codi xifrat correspon al número "5"
-    const codiCorrecteXifrat = "\x16";
-
     function comprovarCodi() {
-      const codiEntrat = document.getElementById("codiInput").value.toUpperCase();
-      if (desxifrar(codiCorrecteXifrat) === codiEntrat) {
-        document.getElementById("missatge").innerHTML = "<span style='color:#FFD700;'>Aquí hi ha germans que no comparteixen sang suposo que ja ho sabeu no?</span>";
-        document.getElementById("soMisteri").play();
+      const codiCorrecte = String.fromCharCode(53);
+      const codiIntroduit = normalitzarCodi(document.getElementById("codiInput").value.trim());
+      const missatgeDiv = document.getElementById("missatge");
+      const so = document.getElementById("soExit");
+
+      if (codiIntroduit === codiCorrecte) {
+        missatgeDiv.textContent = "✅ Correcte! Has descobert:";
+        missatgeDiv.className = "correcte";
+        const info = document.createElement("p");
+        info.innerHTML = "<strong>Aquí hi ha germans que no comparteixen sang suposo que ja ho sabeu no?</strong>";
+        missatgeDiv.appendChild(info);
+        so.play();
       } else {
-        document.getElementById("missatge").innerText = "Codi incorrecte. Torneu-ho a provar.";
+        missatgeDiv.textContent = "❌ Codi incorrecte. Torna-ho a provar.";
+        missatgeDiv.className = "incorrecte";
+      }
+    }
+
+    function alternarMusica() {
+      const musica = document.getElementById("musicaFons");
+      const boto = document.getElementById("toggleMusic");
+      if (musica.paused) {
+        musica.play();
+        boto.textContent = "🔇 Silenciar música";
+      } else {
+        musica.pause();
+        boto.textContent = "🔊 Activar música";
       }
     }
   </script>
+
 </body>
 </html>
