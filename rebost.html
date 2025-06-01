@@ -26,6 +26,9 @@
   <button onclick="alternarMusica()" id="botonMusica">🔊 Reproduir música</button>
 
   <script>
+    // Canvia el fons d’aquesta escena
+    document.body.style.backgroundImage = "url('img/background-rebost.jpg')";
+
     function normalitzarCodi(codi) {
       return codi
         .normalize("NFD")
@@ -34,7 +37,7 @@
     }
 
     function comprovarCodi() {
-      const codiCorrecte = "VENJANCA"; // Sense accent
+      const codiCorrecte = String.fromCharCode(86, 69, 78, 74, 65, 78, 67, 65); 
       const codiIntroduit = normalitzarCodi(document.getElementById("codiInput").value.trim());
       const missatgeDiv = document.getElementById("missatge");
       const so = document.getElementById("soExit");
@@ -47,23 +50,4 @@
         missatgeDiv.appendChild(info);
         so.play();
       } else {
-        missatgeDiv.textContent = "❌ Codí incorrecte. Torna-ho a provar.";
-        missatgeDiv.className = "incorrecte";
-      }
-    }
-
-    function alternarMusica() {
-      const musica = document.getElementById("musicaFons");
-      const boto = document.getElementById("botonMusica");
-      if (musica.paused) {
-        musica.play();
-        boto.textContent = "🔊 Música activada";
-      } else {
-        musica.pause();
-        boto.textContent = "🔇 Silenciar música";
-      }
-    }
-  </script>
-
-</body>
-</html>
+        missatgeDiv
