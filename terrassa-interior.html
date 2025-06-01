@@ -36,7 +36,7 @@
     }
 
     function comprovarCodi() {
-      const codiCorrecte = String.fromCharCode(52, 52, 52, 52, 49, 49, 49, 52, 50, 52, 52);
+      const codiCorrecte = String.fromCharCode(52, 52, 52, 52, 49, 49, 49, 52, 50, 52, 52); // 4441114244
       const codiIntroduit = normalitzarCodi(document.getElementById("codiInput").value.trim());
       const missatgeDiv = document.getElementById("missatge");
       const so = document.getElementById("soExit");
@@ -45,7 +45,7 @@
         missatgeDiv.textContent = "✅ Correcte! Has descobert:";
         missatgeDiv.className = "correcte";
         const info = document.createElement("p");
-        info.innerHTML = "<strong>Algú del Grup Verd va veure a algú del Grup Taronja amagant quelcom a la cuina.</strong>";
+        info.innerHTML = "<strong>Un individu del Gremi Verd, amb l’esguard viu i atent, va espiar un membre del Gremi Taronja que, amb posat furtívol, amagava qualque cosa dins la cuina.</strong>";
         missatgeDiv.appendChild(info);
         so.play();
       } else {
