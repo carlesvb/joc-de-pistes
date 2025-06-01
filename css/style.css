@@ -1,14 +1,18 @@
 body {
   font-family: 'Segoe UI', sans-serif;
   background-color: #111;
-  color: #eee;
+  color: #aaa; /* 🔹 Tot el text és gris per defecte */
   text-align: center;
   padding: 40px 20px;
-  background-image: url('../img/background.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   transition: background-color 0.5s ease;
+}
+
+/* Títol principal */
+h1 {
+  color: white;
 }
 
 input {
@@ -19,6 +23,8 @@ input {
   margin-bottom: 20px;
   border: none;
   border-radius: 5px;
+  font-family: inherit;
+  color: #333;
 }
 
 button {
@@ -31,13 +37,14 @@ button {
   cursor: pointer;
   margin-top: 10px;
   display: inline-block;
+  font-family: inherit;
 }
 
 .correcte {
-  color: #0f0;
+  color: #0f0; /* ✅ Verd clar per èxit */
   font-weight: bold;
 }
 
 .incorrecte {
-  color: #f66;
+  color: #f66; /* ❌ Vermell suau per error */
 }
