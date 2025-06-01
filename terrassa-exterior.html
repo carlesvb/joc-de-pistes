@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Terrassa Exterior</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <h1>🪄 Terrassa Exterior</h1>
+  <p>L'arma d'un assassinat és una cosa que es porta molt en aquest grup, no germans Marbà? PISTA: Paraula polisèmica.</p>
+
+  <input type="text" id="codiInput" placeholder="Introdueix la resposta aquí">
+  <button onclick="comprovarCodi()">Verificar</button>
+
+  <div id="missatge"></div>
+
+  <!-- Sons -->
+  <audio id="soExit">
+    <source src="audio/success.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="musicaFons" loop>
+    <source src="audio/music.mp3" type="audio/mpeg">
+  </audio>
+  <button onclick="alternarMusica()" id="botonMusica">🔊 Reproduir música</button>
+
+  <script>
+    document.body.style.backgroundImage = "url('img/background-terrassa-exterior.jpg')";
+
+    function normalitzarCodi(codi) {
+      return codi
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toUpperCase();
+    }
+
+    function comprovarCodi() {
+      const codiCorrecte = String.fromCharCode(77, 79, 67, 65, 68, 79, 82); // MOCADOR
+      const codiIntroduit = normalitzarCodi(document.getElementById("codiInput").value.trim());
+      const missatgeDiv = document.getElementById("missatge");
+      const so = document.getElementById("soExit");
+
+      if (codiIntroduit === codiCorrecte) {
+        missatgeDiv.textContent = "✅ Correcte! Has descobert:";
+        missatgeDiv.className = "correcte";
+        const info = document.createElement("p");
+        info.innerHTML = "<strong>Ara ja sabeu com va ser assassinada la Srta. Laia.</strong>";
+        missatgeDiv.appendChild(info);
+        so.play();
+      } else {
+        missatgeDiv.textContent = "❌ Codí incorrecte. Torna-ho a provar.";
+        missatgeDiv.className = "incorrecte";
+      }
+    }
+
+    function alternarMusica() {
+      const musica = document.getElementById("musicaFons");
+      const boto = document.getElementById("botonMusica");
+      if (musica.paused) {
+        musica.play();
+        boto.textContent = "🔊 Música activada";
+      } else {
+        musica.pause();
+        boto.textContent = "🔇 Silenciar música";
+      }
+    }
+  </script>
+
+</body>
+</html>
