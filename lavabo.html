@@ -40,7 +40,7 @@
     }
 
     function comprovarCodi() {
-      const codiCorrecte = String.fromCharCode(73, 78, 70, 79, 82, 77, 65, 84, 73, 67, 65); // INFORMATICA (sense accent)
+      const codiCorrecte = String.fromCharCode(73, 78, 70, 79, 82, 77, 65, 84, 73, 67, 65); 
       const codiIntroduit = normalitzarCodi(document.getElementById("codiInput").value.trim());
       const missatgeDiv = document.getElementById("missatge");
       const so = document.getElementById("soExit");
