@@ -9,7 +9,7 @@
 <body>
 
   <h1>🚪 Habitació 4</h1>
-  <p>Frase inicial pendent d'afegir.</p>
+  <p>Que son? On els heu trobat? PARAULA1-PARAULA 2</p>
 
   <input type="text" id="codiInput" placeholder="Introdueix la resposta aquí">
   <button onclick="comprovarCodi()">Verificar</button>
@@ -40,7 +40,7 @@
 
     function comprovarCodi() {
       // 🔐 Substitueix aquesta línia pel codi secret quan el tinguis
-      const codiCorrecte = ""; // Exemple: String.fromCharCode(82, 69, 86, 73, 83, 84, 65);
+      const codiCorrecte = String.fromCharCode(103, 101, 114, 109, 97, 110, 115, 45, 108, 108, 105, 116);
       const codiIntroduit = normalitzarCodi(document.getElementById("codiInput").value.trim());
       const missatgeDiv = document.getElementById("missatge");
       const so = document.getElementById("soExit");
