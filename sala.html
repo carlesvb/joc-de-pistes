@@ -39,8 +39,7 @@
     }
 
     function comprovarCodi() {
-      // 🔐 Substitueix aquesta línia pel codi secret quan el tinguis
-      const codiCorrecte = ""; // Exemple: String.fromCharCode(77, 79, 67, 65, 68, 79, 82);
+      const codiCorrecte = String.fromCharCode(49,49,51,53,52,52,57,48,49,57,48,49,57,48,54,49,56,48,49,57,48,52,50,55,48,50);
       const codiIntroduit = normalitzarCodi(document.getElementById("codiInput").value.trim());
       const missatgeDiv = document.getElementById("missatge");
       const so = document.getElementById("soExit");
